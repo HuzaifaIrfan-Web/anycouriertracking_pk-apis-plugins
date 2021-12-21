@@ -14,6 +14,7 @@ RUN pip install numpy==1.21.3
 RUN pip install opencv-python-headless==4.5.4.60
 
 
+
 COPY ./requirements.txt /app/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
@@ -25,4 +26,5 @@ COPY ./ /app
 
 EXPOSE 5000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
+
+CMD ["gunicorn", "main:app", "-k", "uvicorn.workers.UvicornWorker", "-w", "1", "--threads", "4", "--timeout", "120", "-b", "0.0.0.0:5000"]

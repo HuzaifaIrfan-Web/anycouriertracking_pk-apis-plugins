@@ -2,8 +2,9 @@
 from bs4 import BeautifulSoup
 
 
+
 import os
-from bs4 import BeautifulSoup
+
 
 import uuid
 
@@ -77,35 +78,127 @@ def check_validation(driver):
         return True
 
 
-host_name = os.environ.get('HUB_URI','http://selenium-hub:4444/wd/hub')
-print(host_name)
+selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
+print(selenium_hub_host_name)
 
 
 # import urllib
 # request_url = urllib.request.urlopen(host_name)
 # print(request_url.read())
 
-# time.sleep(5)
+time.sleep(5)
 
 
+import datetime
+
+
+drivers=[]
+
+
+
+url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
+
+for i in range(0,4):
     
-def track(tracking_number_text):
-    # tracking_number_text=63346811006
-    url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
-    url=url+str(tracking_number_text)
+    print(datetime.datetime.now(), end=' ')
 
+    print(f'Setting Up Firefox Selenium Driver {i}')
+    # driver = webdriver.Firefox(options=firefox_opt)
 
     driver = webdriver.Remote(
-    command_executor=host_name,
+    command_executor=selenium_hub_host_name,
     desired_capabilities={
                 "browserName": "firefox",
             })
 
 
+    
 
     driver.get(url)
+    drivers.append({'use':None,'driver':driver,'epoch':0})
+
+    print(datetime.datetime.now(), end=' ')
+
+    print(f'Started Firefox Selenium Driver {i}')
+
+
+
+
+def select_driver(req_id):
+
+    selecting=True
+
+    while selecting:
+
+        for i,driver_obj in enumerate(drivers):
+            
+            if driver_obj['use'] ==None:
+
+                driver_obj['use']=req_id
+
+                epoch=int(datetime.datetime.now().timestamp())
+                # print(epoch)
+                driver_obj['epoch']=epoch
+
+                driver=driver_obj['driver']
+                index=i
+                print(datetime.datetime.now(), end=f' {req_id} ')
+                print(f'{i} Selenium Driver Selected')
+
+
+                selecting=False
+                break
+            else:
+                epoch=int(datetime.datetime.now().timestamp())
+                # print(epoch)
+                if (epoch > driver_obj['epoch'] +20):
+                    print(datetime.datetime.now(), end=' ')
+                    print(f'{i} Driver Use TimeOut')
+                    driver_obj['use'] =None
+
+    return index, driver
+
+
+
+    
+
+
+    
+def track(tracking_number_text):
+    # tracking_number_text=63346811006
+    # url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
+    # url=url+str(tracking_number_text)
+    
+
+    req_id = uuid.uuid1().hex
+
+    selecting=True
+    while selecting:
+
+        index,driver=select_driver(req_id)
+
+        if drivers[index]['use']==req_id:
+            selecting=False
+
+
+
+
+    # driver.get(url)
+
+
+
+
+    
     running=True
     while(running):
+
+        if not drivers[index]['use']==req_id:
+            return track(tracking_number_text)
+
+        eleUserMessage = driver.find_element(By.ID, "keyword")
+        eleUserMessage.clear()
+        eleUserMessage.send_keys(tracking_number_text)
+
 
         captcha_image=return_captcha_image(driver)
         captcha_path=save_captcha_image(captcha_image)
@@ -122,14 +215,19 @@ def track(tracking_number_text):
 
     innerHtml=body.get_attribute('innerHTML')
 
-    driver.quit()
+    # driver.quit()
+    drivers[index]['use'] =None
     
     soup = BeautifulSoup(innerHtml, 'html.parser')
 
 
+    try:
 
-
-    response=scrape_data(soup)
+        response=scrape_data(soup)
+    
+    except:
+        raise Exception
+        # return {'msg':'Not Found'}
     
     
 

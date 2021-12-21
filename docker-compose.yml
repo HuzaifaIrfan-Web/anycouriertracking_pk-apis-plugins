@@ -24,8 +24,8 @@ services:
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
-      - NODE_MAX_SESSION=2
-      - NODE_MAX_INSTANCES=2
+      - NODE_MAX_SESSION=10
+      - NODE_MAX_INSTANCES=10
 
     volumes:
       - /dev/shm:/dev/shm
@@ -69,7 +69,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - 5000:80
+      - 80:80
       # - 443:443
 
     
