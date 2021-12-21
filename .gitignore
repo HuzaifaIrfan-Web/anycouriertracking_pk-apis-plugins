@@ -129,6 +129,5 @@ dmypy.json
 .pyre/
 
 
-tmp_captchas/
-solved_captchas/
-original_captchas/
+tmp/
+
