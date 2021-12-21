@@ -9,7 +9,8 @@ services:
       # - GRID_TIMEOUT=20
       # - GRID_BROWSER_TIMEOUT=20
       # - GRID_MAX_SESSION=2
-
+      
+    restart: always
     ports:
       - "4444:4444"
     networks:
@@ -30,6 +31,8 @@ services:
     volumes:
       - /dev/shm:/dev/shm
 
+
+    restart: always
     
 
     ports:
@@ -43,6 +46,8 @@ services:
     build: ./stcourier_scraper_api
     container_name: stcourier_scraper_api
 
+    
+    restart: always
 
     depends_on:
       - selenium-hub
@@ -68,6 +73,9 @@ services:
     container_name: production_nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+
+
+    restart: always
     ports:
       - 80:80
       # - 443:443

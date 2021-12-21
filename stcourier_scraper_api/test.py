@@ -5,13 +5,15 @@ import json
 urls = [
 ]
 
+host='34.65.143.9'
+# host='0.0.0.0:5000'
 
 
-url='http://0.0.0.0:5000/track/stcourier_scraper_api?q=63346811006'
+url=f'http://{host}/track/stcourier_scraper_api?q=63346811006'
 
 
 
-for i in range(0,5):
+for i in range(0,20):
 
     urls.append(url)
 
@@ -33,6 +35,7 @@ for res in responses:
     try:
         d = json.loads(res.content)
         print(d.keys())
+        print(d)
     except:
         print(res.content)
         print('json error')
