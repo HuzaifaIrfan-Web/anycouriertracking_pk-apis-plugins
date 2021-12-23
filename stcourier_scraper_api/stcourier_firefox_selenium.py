@@ -98,7 +98,7 @@ drivers=[]
 
 url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
 
-for i in range(0,4):
+for i in range(0,1):
     
     print(datetime.datetime.now(), end=' ')
 
