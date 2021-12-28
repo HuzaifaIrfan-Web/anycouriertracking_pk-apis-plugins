@@ -18,7 +18,73 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+
+
+
+# selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
+# print(selenium_hub_host_name)
+
+
+# import urllib
+# request_url = urllib.request.urlopen(host_name)
+# print(request_url.read())
+
+# time.sleep(5)
+
+
+import datetime
+
+
+drivers=[]
+
+
 firefox_opt = FirefoxOptions()
+firefox_opt.add_argument("--headless")
+# firefox_opt.set_preference('permissions.default.stylesheet', 2)
+# firefox_opt.set_preference('permissions.default.image', 2)
+# firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+
+
+from selenium.webdriver.chrome.options import Options
+chrome_opt = Options()
+chrome_opt.add_argument('--headless')
+chrome_opt.add_argument('--no-sandbox')
+chrome_opt.add_argument('--disable-dev-sh--usage')
+
+
+url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
+
+for i in range(0,1):
+    
+    print(datetime.datetime.now(), end=' ')
+
+    # print(f'Setting Up Firefox Selenium Driver {i}')
+    # driver = webdriver.Firefox(options=firefox_opt)
+
+    print(f'Setting Up Chrome Selenium Driver {i}')
+    driver = webdriver.Chrome(options=chrome_opt)
+
+    # driver = webdriver.Remote(
+    # command_executor=selenium_hub_host_name,
+    # desired_capabilities={
+    #             "browserName": "firefox",
+    #         })
+
+
+    
+
+    driver.get(url)
+    drivers.append({'use':None,'driver':driver,'epoch':0})
+
+    print(datetime.datetime.now(), end=' ')
+
+    # print(f'Started Firefox Selenium Driver {i}')
+    print(f'Started Chrome Selenium Driver {i}')
+
+
+
+
+
 
 def return_captcha_image(driver):
     captcha_image=driver.find_element_by_xpath('//*[@id="captchaimg"]').screenshot_as_png
@@ -76,51 +142,6 @@ def check_validation(driver):
     except:
         print('Validation correct')
         return True
-
-
-selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
-print(selenium_hub_host_name)
-
-
-# import urllib
-# request_url = urllib.request.urlopen(host_name)
-# print(request_url.read())
-
-time.sleep(5)
-
-
-import datetime
-
-
-drivers=[]
-
-
-
-url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
-
-for i in range(0,1):
-    
-    print(datetime.datetime.now(), end=' ')
-
-    print(f'Setting Up Firefox Selenium Driver {i}')
-    # driver = webdriver.Firefox(options=firefox_opt)
-
-    driver = webdriver.Remote(
-    command_executor=selenium_hub_host_name,
-    desired_capabilities={
-                "browserName": "firefox",
-            })
-
-
-    
-
-    driver.get(url)
-    drivers.append({'use':None,'driver':driver,'epoch':0})
-
-    print(datetime.datetime.now(), end=' ')
-
-    print(f'Started Firefox Selenium Driver {i}')
-
 
 
 

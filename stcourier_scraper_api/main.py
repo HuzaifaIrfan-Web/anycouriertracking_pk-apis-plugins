@@ -1,44 +1,51 @@
-from typing import Optional
+import json
+import uuid
+from flask import Flask, render_template, request, jsonify, redirect
 
-from fastapi import FastAPI, HTTPException
+app = Flask(__name__)
 
 from stcourier_firefox_selenium import track
 
-app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
 
 
-# @app.get("/items/{item_id}")
-# def read_item(item_id: int, q: Optional[str] = None):
-#     return {"item_id": item_id, "q": q}
 
-@app.get("/track/stcourier_scraper_api")
-def track_query(q: Optional[str] = None):
+
+
+@app.route('/track/stcourier_scraper_api',methods = ['GET'])
+def api():
+
 
     try:
-        tracking_number=int(q)
-        print(tracking_number)
+        tracking_number = int(request.args.get('q'))
+        print(f'q: {tracking_number}')
+
+
+
         if len(str(tracking_number)) == 11:
             print('Valid T num')
         else:
-            raise HTTPException(status_code=404, detail="Please Enter valid Tracking Number")
-            # return {'msg':'Please Enter valid Tracking Number'}
+            return jsonify({'msg':'Please Enter Valid Tracking Number'}), 422
+    
 
     except:
-        raise HTTPException(status_code=404, detail="Please Enter valid Tracking Number")
-        # return {'msg':'Please Enter valid Tracking Number'}
+        return jsonify({'msg':'Please Enter Tracking Number'}), 422
+
+
+
 
 
     try:
         response=track(tracking_number)
+        return jsonify(response), 200
     except:
         
-        raise HTTPException(status_code=404, detail="Not Found")
-        # response={'msg':'Internal Server Error'}
+        return jsonify({'msg':'NO Details Found'}), 422
+
+if __name__ == '__main__':
+	app.run(debug=True)
+    
 
 
-    return  response
+
