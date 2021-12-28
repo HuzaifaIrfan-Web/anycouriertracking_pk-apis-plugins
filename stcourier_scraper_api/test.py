@@ -13,7 +13,7 @@ url=f'http://{host}/track/stcourier_scraper_api?q=63346811006'
 
 
 
-for i in range(0,20):
+for i in range(0,5):
 
     urls.append(url)
 
@@ -35,7 +35,7 @@ for res in responses:
     try:
         d = json.loads(res.content)
         print(d.keys())
-        print(d)
+        # print(d)
     except:
         print(res.content)
         print('json error')
