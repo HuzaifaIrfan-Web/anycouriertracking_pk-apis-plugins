@@ -4,7 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytesseract = "*"
+pytesseract = "==0.3.8"
+selenium = "==4.0.0a1"
+imutils = "==0.5.4"
+beautifulsoup4 = "==4.8.2"
+numpy = "==1.21.3"
+opencv-python-headless = "==4.5.4.60"
+pillow = "==8.4.0"
+flask = "==2.0.2"
 
 [dev-packages]
 
