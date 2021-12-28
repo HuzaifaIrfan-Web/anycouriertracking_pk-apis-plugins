@@ -2,7 +2,7 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 
-from stcourier_firefox_selenium import track
+from stcourier_chrome_selenium import track
 
 app = FastAPI()
 

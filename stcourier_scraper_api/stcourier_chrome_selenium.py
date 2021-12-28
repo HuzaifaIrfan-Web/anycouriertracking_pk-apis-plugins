@@ -54,7 +54,7 @@ chrome_opt.add_argument('--disable-dev-sh--usage')
 
 url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
 
-for i in range(0,1):
+for i in range(0,2):
     
     print(datetime.datetime.now(), end=' ')
 

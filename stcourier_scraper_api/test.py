@@ -5,7 +5,7 @@ import json
 urls = [
 ]
 
-host='34.65.143.9'
+host='server.skiie.com'
 # host='0.0.0.0:5000'
 
 
