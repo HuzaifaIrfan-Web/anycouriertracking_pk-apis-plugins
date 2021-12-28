@@ -31,7 +31,7 @@ RUN pip install imutils==0.5.4 beautifulsoup4==4.8.2 pytesseract==0.3.8 selenium
 RUN pip install numpy==1.21.3
 RUN pip install opencv-python-headless==4.5.4.60
 
-
+RUN apt install -y gunicorn
 
 
 
