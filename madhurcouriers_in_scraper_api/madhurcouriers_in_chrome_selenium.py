@@ -46,7 +46,7 @@ firefox_opt.add_argument("--headless")
 
 from selenium.webdriver.chrome.options import Options
 chrome_opt = Options()
-# chrome_opt.add_argument('--headless')
+chrome_opt.add_argument('--headless')
 chrome_opt.add_argument('--no-sandbox')
 chrome_opt.add_argument('--disable-dev-sh--usage')
 
