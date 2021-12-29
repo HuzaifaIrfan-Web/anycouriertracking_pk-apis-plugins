@@ -53,7 +53,7 @@ chrome_opt.add_argument('--disable-dev-sh--usage')
 
 url='https://www.madhurcouriers.in/CNoteTracking'
 
-for i in range(0,2):
+for i in range(0,1):
     
     print(datetime.datetime.now(), end=' ')
 
