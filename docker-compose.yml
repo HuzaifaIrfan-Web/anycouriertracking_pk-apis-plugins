@@ -42,6 +42,18 @@ services:
   #     - grid 
 
 
+
+  madhurcouriers_in_scraper_api:
+    build: ./madhurcouriers_in_scraper_api
+    container_name: madhurcouriers_in_scraper_api
+
+    
+    restart: always
+
+    networks:
+      - apis
+
+
   stcourier_scraper_api:
     build: ./stcourier_scraper_api
     container_name: stcourier_scraper_api

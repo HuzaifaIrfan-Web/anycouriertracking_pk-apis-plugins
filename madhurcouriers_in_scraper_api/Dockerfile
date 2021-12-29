@@ -24,14 +24,11 @@ ENV LC_ALL C.UTF-8
 ENV PYTHONUNBUFFERED=1
 
 
-RUN apt install -y tesseract-ocr python3-bs4 python3-opencv
+RUN apt install -y python3-bs4 
 
 WORKDIR /app
 
-RUN pip install imutils==0.5.4 beautifulsoup4==4.8.2 pytesseract==0.3.8 selenium==4.0.0a1
-RUN pip install numpy==1.21.3
-RUN pip install opencv-python-headless==4.5.4.60
-
+RUN pip install beautifulsoup4==4.8.2 selenium==4.0.0a1
 
 
 

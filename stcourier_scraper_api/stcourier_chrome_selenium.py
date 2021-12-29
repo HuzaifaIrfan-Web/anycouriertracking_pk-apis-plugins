@@ -54,7 +54,7 @@ chrome_opt.add_argument('--disable-dev-sh--usage')
 
 url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
 
-for i in range(0,2):
+for i in range(0,1):
     
     print(datetime.datetime.now(), end=' ')
 
@@ -131,7 +131,8 @@ def use_captcha_solution(driver, captcha_solution):
 
 
 def check_validation(driver):
-    time.sleep(3)
+    time.sleep(1)
+    # driver.implicitly_wait(1000)
 
     try:
 
@@ -341,8 +342,8 @@ def scrape_data(soup):
 
 
     return_obj={
-        "tracking_number":tracking_number,
-        "DELIVERY_STATUS":DELIVERY_STATUS_obj,
+        "tnum":tracking_number,
+        "status":DELIVERY_STATUS_obj,
         "track_histories":track_histories
     }
 
