@@ -5,16 +5,16 @@ import json
 urls = [
 ]
 
-# host='server.skiie.com'
+host='server.skiie.com'
 # host='0.0.0.0:5000'
-host='localhost'
+# host='localhost'
 
 
 url=f'http://{host}/track/madhurcouriers_in_scraper_api?tnum=P501687103'
 
 
 
-for i in range(0,2):
+for i in range(0,5):
 
     urls.append(url)
 

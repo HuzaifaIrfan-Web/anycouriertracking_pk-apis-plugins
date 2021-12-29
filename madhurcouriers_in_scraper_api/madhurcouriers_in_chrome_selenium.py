@@ -117,7 +117,7 @@ def select_driver(req_id):
             else:
                 epoch=int(datetime.datetime.now().timestamp())
                 # print(epoch)
-                if (epoch > driver_obj['epoch'] +20):
+                if (epoch > driver_obj['epoch'] +5):
                     print(datetime.datetime.now(), end=' ')
                     print(f'{i} Driver Use TimeOut')
                     driver_obj['use'] =None
