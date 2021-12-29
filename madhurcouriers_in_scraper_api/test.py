@@ -5,16 +5,18 @@ import json
 urls = [
 ]
 
-host='server.skiie.com'
-# host='0.0.0.0:5000'
+# host='server.skiie.com'
+host='localhost:8000'
 # host='localhost'
 
 
-url=f'http://{host}/track/madhurcouriers_in_scraper_api?tnum=P501687103'
+
+for i in range(0,9):
 
 
+    url=f'http://{host}/track/madhurcouriers_in_scraper_api?tnum=P50168710{i}'
 
-for i in range(0,20):
+
 
     urls.append(url)
 
@@ -38,7 +40,7 @@ for res in responses:
         print(d.keys())
         # print(d)
     except:
-        print(res.content)
+        print(res)
         print('json error')
     
 end=datetime.datetime.now()

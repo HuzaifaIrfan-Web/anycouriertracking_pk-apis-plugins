@@ -46,7 +46,7 @@ firefox_opt.add_argument("--headless")
 
 from selenium.webdriver.chrome.options import Options
 chrome_opt = Options()
-chrome_opt.add_argument('--headless')
+# chrome_opt.add_argument('--headless')
 chrome_opt.add_argument('--no-sandbox')
 chrome_opt.add_argument('--disable-dev-sh--usage')
 
@@ -162,7 +162,9 @@ def track(tracking_number_text):
 
     driver.find_element(By.ID , "ContentPlaceHolder1_btnSearch").click()
 
-    driver.implicitly_wait(100)
+    # driver.implicitly_wait(1000)
+    time.sleep(2)
+
 
 
 
@@ -182,14 +184,16 @@ def track(tracking_number_text):
     try:
 
         response=scrape_data(tracking_number_text,soup)
+        return response
     
     except:
         raise Exception
         # return {'msg':'Not Found'}
+
     
     
 
-    return response
+    
 
 
     
