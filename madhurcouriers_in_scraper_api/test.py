@@ -5,20 +5,21 @@ import json
 urls = [
 ]
 
-# host='server.skiie.com'
-host='localhost:8000'
+host='server.skiie.com'
+# host='localhost:8000'
 # host='localhost'
 
 
 
 for i in range(0,9):
 
+    for j in range(0,9):
 
-    url=f'http://{host}/track/madhurcouriers_in_scraper_api?tnum=P50168710{i}'
+        url=f'http://{host}/track/madhurcouriers_in_scraper_api?tnum=P5016871{i}{j}'
 
 
 
-    urls.append(url)
+        urls.append(url)
 
 start=datetime.datetime.now()
 
@@ -37,6 +38,7 @@ for res in responses:
     # print(res.content)
     try:
         d = json.loads(res.content)
+        print(d['tnum'])
         print(d.keys())
         # print(d)
     except:
