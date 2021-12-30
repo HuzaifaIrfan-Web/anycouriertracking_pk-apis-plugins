@@ -53,6 +53,9 @@ services:
     networks:
       - apis
 
+    volumes:
+      - /dev/shm:/dev/shm
+
 
   stcourier_scraper_api:
     build: ./stcourier_scraper_api
@@ -60,6 +63,9 @@ services:
 
     
     restart: always
+
+    volumes:
+      - /dev/shm:/dev/shm
 
     # depends_on:
     #   - selenium-hub
