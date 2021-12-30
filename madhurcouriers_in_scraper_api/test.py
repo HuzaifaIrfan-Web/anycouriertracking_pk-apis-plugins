@@ -11,9 +11,9 @@ host='server.skiie.com'
 
 
 
-for i in range(0,9):
+for i in range(0,2):
 
-    for j in range(0,9):
+    for j in range(0,2):
 
         url=f'http://{host}/track/madhurcouriers_in_scraper_api?tnum=P5016871{i}{j}'
 
