@@ -10,6 +10,7 @@ import uuid
 
 import time
 
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -20,15 +21,19 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
 
-# selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
-# print(selenium_hub_host_name)
+
+url='https://www.madhurcouriers.in/CNoteTracking'
+
+try:
+
+    from .settings import use_firefox
+except:
+  
+    from settings import use_firefox
 
 
-# import urllib
-# request_url = urllib.request.urlopen(host_name)
-# print(request_url.read())
 
-# time.sleep(5)
+
 
 
 import datetime
@@ -37,11 +42,11 @@ import datetime
 drivers=[]
 
 
-# firefox_opt = FirefoxOptions()
-# firefox_opt.add_argument("--headless")
-# firefox_opt.set_preference('permissions.default.stylesheet', 2)
-# firefox_opt.set_preference('permissions.default.image', 2)
-# firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+firefox_opt = FirefoxOptions()
+firefox_opt.add_argument("--headless")
+firefox_opt.set_preference('permissions.default.stylesheet', 2)
+firefox_opt.set_preference('permissions.default.image', 2)
+firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
 
 
 from selenium.webdriver.chrome.options import Options
@@ -51,63 +56,20 @@ chrome_opt.add_argument('--no-sandbox')
 chrome_opt.add_argument('--disable-dev-sh--usage')
 
 
-url='https://www.madhurcouriers.in/CNoteTracking'
-
-# for i in range(0,1):
-    
-#     print(datetime.datetime.now(), end=' ')
-
-#     # print(f'Setting Up Firefox Selenium Driver {i}')
-#     # driver = webdriver.Firefox(options=firefox_opt)
-
-#     print(f'Setting Up Chrome Selenium Driver {i}')
-#     driver = webdriver.Chrome(options=chrome_opt)
-
-#     # driver = webdriver.Remote(
-#     # command_executor=selenium_hub_host_name,
-#     # desired_capabilities={
-#     #             "browserName": "firefox",
-#     #         })
-
-
-    
-
-#     driver.get(url)
-#     drivers.append({'use':None,'driver':driver,'epoch':0})
-
-#     print(datetime.datetime.now(), end=' ')
-
-#     # print(f'Started Firefox Selenium Driver {i}')
-#     print(f'Started Chrome Selenium Driver {i}')
-
-
-
-
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-
-firefox_opt = FirefoxOptions()
-firefox_opt.add_argument("--headless")
-firefox_opt.set_preference('permissions.default.stylesheet', 2)
-firefox_opt.set_preference('permissions.default.image', 2)
-firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
-
-
-drivers=[]
-
 for i in range(0,1):
 
     print(datetime.datetime.now(), end=' ')
 
-    # print(f'Setting Up Chrome Selenium Driver {i}')
 
 
-    # driver = webdriver.Chrome(options=chrome_opt)
+    if use_firefox:
+        print(f'stcourier Setting Up Firefox Selenium Driver {i}')
+        driver = webdriver.Firefox(options=firefox_opt)
+    else:
+        print(f'stcourier Setting Up Chrome Selenium Driver {i}')
+        driver = webdriver.Chrome(options=chrome_opt)
 
 
-    print(f'madhurcouriers_in Setting Up Firefox Selenium Driver {i}')
-
-
-    driver = webdriver.Firefox(options=firefox_opt)
     driver.get(url)
 
 
@@ -115,9 +77,13 @@ for i in range(0,1):
 
     print(datetime.datetime.now(), end=' ')
 
-    print(f'madhurcouriers_in Started Firefox Selenium Driver {i}')
+    if use_firefox:
 
-    # print(f'Started Chrome Selenium Driver {i}')
+        print(f'stcourier Started Firefox Selenium Driver {i}')
+    
+    else:
+
+        print(f'stcourier Started Chrome Selenium Driver {i}')
 
 
 

@@ -5,15 +5,11 @@
 
 
 
-# try:
-#     from .madhurcouriers_in_firefox_selenium import track as return_details
-# except:
-#     from madhurcouriers_in_firefox_selenium import track as return_details
- 
+
 try:
-    from .madhurcouriers_in_chrome_selenium import track as return_details
+    from .madhurcouriers_in_selenium import track as return_details
 except:
-    from madhurcouriers_in_chrome_selenium import track as return_details
+    from madhurcouriers_in_selenium import track as return_details
  
 
 

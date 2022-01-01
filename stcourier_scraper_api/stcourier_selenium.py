@@ -10,8 +10,10 @@ import uuid
 
 try:
     from .stcourier_captcha_solver import captcha_solver
+    from .settings import use_firefox
 except:
     from stcourier_captcha_solver import captcha_solver
+    from settings import use_firefox
 
 
 
@@ -44,11 +46,11 @@ import datetime
 drivers=[]
 
 
-# firefox_opt = FirefoxOptions()
-# firefox_opt.add_argument("--headless")
-# firefox_opt.set_preference('permissions.default.stylesheet', 2)
-# firefox_opt.set_preference('permissions.default.image', 2)
-# firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+firefox_opt = FirefoxOptions()
+firefox_opt.add_argument("--headless")
+firefox_opt.set_preference('permissions.default.stylesheet', 2)
+firefox_opt.set_preference('permissions.default.image', 2)
+firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
 
 
 from selenium.webdriver.chrome.options import Options
@@ -60,60 +62,20 @@ chrome_opt.add_argument('--disable-dev-sh--usage')
 url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
 
 
-# for i in range(0,1):
-    
-#     print(datetime.datetime.now(), end=' ')
-
-#     # print(f'Setting Up Firefox Selenium Driver {i}')
-#     # driver = webdriver.Firefox(options=firefox_opt)
-
-#     print(f'Setting Up Chrome Selenium Driver {i}')
-#     driver = webdriver.Chrome(options=chrome_opt)
-
-#     # driver = webdriver.Remote(
-#     # command_executor=selenium_hub_host_name,
-#     # desired_capabilities={
-#     #             "browserName": "firefox",
-#     #         })
-
-
-    
-
-#     driver.get(url)
-#     drivers.append({'use':None,'driver':driver,'epoch':0})
-
-#     print(datetime.datetime.now(), end=' ')
-
-#     # print(f'Started Firefox Selenium Driver {i}')
-#     print(f'Started Chrome Selenium Driver {i}')
-
-
-
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-
-firefox_opt = FirefoxOptions()
-firefox_opt.add_argument("--headless")
-firefox_opt.set_preference('permissions.default.stylesheet', 2)
-firefox_opt.set_preference('permissions.default.image', 2)
-firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
-
-
-drivers=[]
-
 for i in range(0,1):
 
     print(datetime.datetime.now(), end=' ')
 
-    # print(f'Setting Up Chrome Selenium Driver {i}')
 
 
-    # driver = webdriver.Chrome(options=chrome_opt)
+    if use_firefox:
+        print(f'stcourier Setting Up Firefox Selenium Driver {i}')
+        driver = webdriver.Firefox(options=firefox_opt)
+    else:
+        print(f'stcourier Setting Up Chrome Selenium Driver {i}')
+        driver = webdriver.Chrome(options=chrome_opt)
 
 
-    print(f'stcourier Setting Up Firefox Selenium Driver {i}')
-
-
-    driver = webdriver.Firefox(options=firefox_opt)
     driver.get(url)
 
 
@@ -121,9 +83,13 @@ for i in range(0,1):
 
     print(datetime.datetime.now(), end=' ')
 
-    print(f'stcourier Started Firefox Selenium Driver {i}')
+    if use_firefox:
 
-    # print(f'Started Chrome Selenium Driver {i}')
+        print(f'stcourier Started Firefox Selenium Driver {i}')
+    
+    else:
+
+        print(f'stcourier Started Chrome Selenium Driver {i}')
 
 
 
