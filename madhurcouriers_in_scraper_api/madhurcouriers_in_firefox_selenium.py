@@ -37,8 +37,8 @@ import datetime
 drivers=[]
 
 
-firefox_opt = FirefoxOptions()
-firefox_opt.add_argument("--headless")
+# firefox_opt = FirefoxOptions()
+# firefox_opt.add_argument("--headless")
 # firefox_opt.set_preference('permissions.default.stylesheet', 2)
 # firefox_opt.set_preference('permissions.default.image', 2)
 # firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
@@ -53,34 +53,71 @@ chrome_opt.add_argument('--disable-dev-sh--usage')
 
 url='https://www.madhurcouriers.in/CNoteTracking'
 
-for i in range(0,1):
+# for i in range(0,1):
     
+#     print(datetime.datetime.now(), end=' ')
+
+#     # print(f'Setting Up Firefox Selenium Driver {i}')
+#     # driver = webdriver.Firefox(options=firefox_opt)
+
+#     print(f'Setting Up Chrome Selenium Driver {i}')
+#     driver = webdriver.Chrome(options=chrome_opt)
+
+#     # driver = webdriver.Remote(
+#     # command_executor=selenium_hub_host_name,
+#     # desired_capabilities={
+#     #             "browserName": "firefox",
+#     #         })
+
+
+    
+
+#     driver.get(url)
+#     drivers.append({'use':None,'driver':driver,'epoch':0})
+
+#     print(datetime.datetime.now(), end=' ')
+
+#     # print(f'Started Firefox Selenium Driver {i}')
+#     print(f'Started Chrome Selenium Driver {i}')
+
+
+
+
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
+firefox_opt = FirefoxOptions()
+firefox_opt.add_argument("--headless")
+firefox_opt.set_preference('permissions.default.stylesheet', 2)
+firefox_opt.set_preference('permissions.default.image', 2)
+firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+
+
+drivers=[]
+
+for i in range(0,1):
+
     print(datetime.datetime.now(), end=' ')
 
-    # print(f'Setting Up Firefox Selenium Driver {i}')
-    # driver = webdriver.Firefox(options=firefox_opt)
-
-    print(f'Setting Up Chrome Selenium Driver {i}')
-    driver = webdriver.Chrome(options=chrome_opt)
-
-    # driver = webdriver.Remote(
-    # command_executor=selenium_hub_host_name,
-    # desired_capabilities={
-    #             "browserName": "firefox",
-    #         })
+    # print(f'Setting Up Chrome Selenium Driver {i}')
 
 
-    
+    # driver = webdriver.Chrome(options=chrome_opt)
 
+
+    print(f'madhurcouriers_in Setting Up Firefox Selenium Driver {i}')
+
+
+    driver = webdriver.Firefox(options=firefox_opt)
     driver.get(url)
+
+
     drivers.append({'use':None,'driver':driver,'epoch':0})
 
     print(datetime.datetime.now(), end=' ')
 
-    # print(f'Started Firefox Selenium Driver {i}')
-    print(f'Started Chrome Selenium Driver {i}')
+    print(f'madhurcouriers_in Started Firefox Selenium Driver {i}')
 
-
+    # print(f'Started Chrome Selenium Driver {i}')
 
 
 

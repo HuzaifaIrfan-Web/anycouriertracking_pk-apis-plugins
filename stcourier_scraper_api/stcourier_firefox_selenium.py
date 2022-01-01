@@ -8,7 +8,13 @@ import os
 
 import uuid
 
-from stcourier_captcha_solver import captcha_solver
+try:
+    from .stcourier_captcha_solver import captcha_solver
+except:
+    from stcourier_captcha_solver import captcha_solver
+
+
+
 import time
 
 from selenium import webdriver
@@ -38,8 +44,8 @@ import datetime
 drivers=[]
 
 
-firefox_opt = FirefoxOptions()
-firefox_opt.add_argument("--headless")
+# firefox_opt = FirefoxOptions()
+# firefox_opt.add_argument("--headless")
 # firefox_opt.set_preference('permissions.default.stylesheet', 2)
 # firefox_opt.set_preference('permissions.default.image', 2)
 # firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
@@ -51,36 +57,73 @@ chrome_opt.add_argument('--headless')
 chrome_opt.add_argument('--no-sandbox')
 chrome_opt.add_argument('--disable-dev-sh--usage')
 
-
 url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
 
-for i in range(0,1):
+
+# for i in range(0,1):
     
+#     print(datetime.datetime.now(), end=' ')
+
+#     # print(f'Setting Up Firefox Selenium Driver {i}')
+#     # driver = webdriver.Firefox(options=firefox_opt)
+
+#     print(f'Setting Up Chrome Selenium Driver {i}')
+#     driver = webdriver.Chrome(options=chrome_opt)
+
+#     # driver = webdriver.Remote(
+#     # command_executor=selenium_hub_host_name,
+#     # desired_capabilities={
+#     #             "browserName": "firefox",
+#     #         })
+
+
+    
+
+#     driver.get(url)
+#     drivers.append({'use':None,'driver':driver,'epoch':0})
+
+#     print(datetime.datetime.now(), end=' ')
+
+#     # print(f'Started Firefox Selenium Driver {i}')
+#     print(f'Started Chrome Selenium Driver {i}')
+
+
+
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
+firefox_opt = FirefoxOptions()
+firefox_opt.add_argument("--headless")
+firefox_opt.set_preference('permissions.default.stylesheet', 2)
+firefox_opt.set_preference('permissions.default.image', 2)
+firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+
+
+drivers=[]
+
+for i in range(0,1):
+
     print(datetime.datetime.now(), end=' ')
 
-    # print(f'Setting Up Firefox Selenium Driver {i}')
-    # driver = webdriver.Firefox(options=firefox_opt)
-
-    print(f'Setting Up Chrome Selenium Driver {i}')
-    driver = webdriver.Chrome(options=chrome_opt)
-
-    # driver = webdriver.Remote(
-    # command_executor=selenium_hub_host_name,
-    # desired_capabilities={
-    #             "browserName": "firefox",
-    #         })
+    # print(f'Setting Up Chrome Selenium Driver {i}')
 
 
-    
+    # driver = webdriver.Chrome(options=chrome_opt)
 
+
+    print(f'stcourier Setting Up Firefox Selenium Driver {i}')
+
+
+    driver = webdriver.Firefox(options=firefox_opt)
     driver.get(url)
+
+
     drivers.append({'use':None,'driver':driver,'epoch':0})
 
     print(datetime.datetime.now(), end=' ')
 
-    # print(f'Started Firefox Selenium Driver {i}')
-    print(f'Started Chrome Selenium Driver {i}')
+    print(f'stcourier Started Firefox Selenium Driver {i}')
 
+    # print(f'Started Chrome Selenium Driver {i}')
 
 
 
@@ -141,7 +184,7 @@ def check_validation(driver):
         return False
 
     except:
-        print('Validation correct')
+        print('stcourier Validation correct')
         return True
 
 
@@ -165,7 +208,7 @@ def select_driver(req_id):
                 driver=driver_obj['driver']
                 index=i
                 print(datetime.datetime.now(), end=f' {req_id} ')
-                print(f'{i} Selenium Driver Selected')
+                print(f'stcourier {i} Selenium Driver Selected')
 
 
                 selecting=False
@@ -175,7 +218,7 @@ def select_driver(req_id):
                 # print(epoch)
                 if (epoch > driver_obj['epoch'] +20):
                     print(datetime.datetime.now(), end=' ')
-                    print(f'{i} Driver Use TimeOut')
+                    print(f'stcourier {i} Driver Use TimeOut')
                     driver_obj['use'] =None
 
     return index, driver
