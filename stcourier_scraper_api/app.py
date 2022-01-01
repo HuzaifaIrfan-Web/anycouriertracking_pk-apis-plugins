@@ -6,10 +6,15 @@
 
 # from .stcourier_firefox_selenium import track as return_details
  
+# try:
+#     from .stcourier_firefox_selenium import track as return_details
+# except:
+#     from stcourier_firefox_selenium import track as return_details
+
 try:
-    from .stcourier_firefox_selenium import track as return_details
+    from .stcourier_chrome_selenium import track as return_details
 except:
-    from stcourier_firefox_selenium import track as return_details
+    from stcourier_chrome_selenium import track as return_details
  
 
 # app = FastAPI()
