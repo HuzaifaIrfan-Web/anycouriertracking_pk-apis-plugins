@@ -159,7 +159,7 @@ def track(tracking_number_text):
 
 
 
-    old_url = driver.current_url
+    old_url = str(driver.current_url)
     print(f'Old URL {old_url}')
 
 
@@ -174,7 +174,7 @@ def track(tracking_number_text):
     time.sleep(2)
 
 
-    new_url = driver.current_url
+    new_url = str(driver.current_url)
     print(f'New URL {new_url}')
 
 
