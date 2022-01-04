@@ -160,6 +160,7 @@ def track(tracking_number_text):
 
 
     old_url = driver.current_url
+    print(f'Old URL {old_url}')
 
 
     
@@ -174,18 +175,18 @@ def track(tracking_number_text):
 
 
     new_url = driver.current_url
+    print(f'New URL {new_url}')
 
 
     if not(new_url == old_url):
+        print(f'{new_url} not equal {old_url}')
             
-        eleUserMessage = driver.find_element(By.ID, "ContentPlaceHolder1_txtCNote")
-        eleUserMessage.clear()
-        eleUserMessage.send_keys(tracking_number_text)
+        drivers[index]['use'] =None
 
-        driver.find_element(By.ID , "ContentPlaceHolder1_btnSearch").click()
+        return track(tracking_number_text)
 
-        # driver.implicitly_wait(1000)
-        time.sleep(2)
+
+
 
 
 
