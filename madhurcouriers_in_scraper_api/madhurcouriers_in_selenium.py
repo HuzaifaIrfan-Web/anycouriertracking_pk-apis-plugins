@@ -160,7 +160,7 @@ def track(tracking_number_text):
 
 
     old_url = str(driver.current_url)
-    print(f'Old URL {old_url}')
+    print(f'{req_id} Driver {index} Old URL {old_url}')
 
 
     
@@ -175,11 +175,11 @@ def track(tracking_number_text):
 
 
     new_url = str(driver.current_url)
-    print(f'New URL {new_url}')
+    print(f'{req_id} Driver {index} New URL {new_url}')
 
 
     if not(new_url == old_url):
-        print(f'{new_url} not equal {old_url}')
+        print(f'{req_id} Driver {index} {new_url} not equal {old_url}')
             
         drivers[index]['use'] =None
 
@@ -206,9 +206,11 @@ def track(tracking_number_text):
     try:
 
         response=scrape_data(tracking_number_text,soup)
+        print(f'{req_id} Driver {index} Got Response')
         return response
     
     except:
+        print(f'{req_id} Driver {index} Got NO Response')
         raise Exception
         # return {'msg':'Not Found'}
 
