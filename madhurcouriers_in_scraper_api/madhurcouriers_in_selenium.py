@@ -43,7 +43,7 @@ drivers=[]
 
 
 firefox_opt = FirefoxOptions()
-firefox_opt.add_argument("--headless")
+# firefox_opt.add_argument("--headless")
 firefox_opt.set_preference('permissions.default.stylesheet', 2)
 firefox_opt.set_preference('permissions.default.image', 2)
 firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
@@ -120,7 +120,7 @@ def select_driver(req_id):
             else:
                 epoch=int(datetime.datetime.now().timestamp())
                 # print(epoch)
-                if (epoch > driver_obj['epoch'] +5):
+                if (epoch > driver_obj['epoch'] +20):
                     print(datetime.datetime.now(), end=' ')
                     print(f'{i} Driver Use TimeOut')
                     driver_obj['use'] =None
@@ -137,6 +137,7 @@ def track(tracking_number_text):
 
 
     req_id = uuid.uuid1().hex
+    print(f'new reqid {req_id}')
 
     selecting=True
     while selecting:
@@ -155,7 +156,9 @@ def track(tracking_number_text):
 
 
     if not drivers[index]['use']==req_id:
+        print(f'{req_id} driver {index} not using.')
         return track(tracking_number_text)
+
 
 
 
@@ -166,9 +169,12 @@ def track(tracking_number_text):
     
     eleUserMessage = driver.find_element(By.ID, "ContentPlaceHolder1_txtCNote")
     eleUserMessage.clear()
+    print(f'{req_id} clear textbox')
     eleUserMessage.send_keys(tracking_number_text)
+    print(f'{req_id} input textbox')
 
     driver.find_element(By.ID , "ContentPlaceHolder1_btnSearch").click()
+    print(f'{req_id} search click')
 
     # driver.implicitly_wait(1000)
     time.sleep(2)
@@ -185,6 +191,24 @@ def track(tracking_number_text):
 
         return track(tracking_number_text)
 
+    # else:
+    #     print(f'{req_id} Driver {index} {new_url} equal {old_url}')
+            
+    #     drivers[index]['use'] =None
+
+    #     return track(tracking_number_text)
+
+
+        # eleUserMessage = driver.find_element(By.ID, "ContentPlaceHolder1_txtCNote")
+        # eleUserMessage.clear()
+        # eleUserMessage.send_keys(tracking_number_text)
+
+        # driver.find_element(By.ID , "ContentPlaceHolder1_btnSearch").click()
+
+        # # driver.implicitly_wait(1000)
+        # time.sleep(2)
+
+
 
 
 
@@ -192,19 +216,28 @@ def track(tracking_number_text):
 
     
     body = driver.find_element(By.ID , "ContentPlaceHolder1_gvBookings")
+    print(f'{req_id} find body')
 
 
 
     innerHtml=body.get_attribute('innerHTML')
 
+
  
     drivers[index]['use'] =None
     
     soup = BeautifulSoup(innerHtml, 'html.parser')
+    print(f'{req_id} soup')
+
+    with open('innerHtml.txt', 'w') as file:
+        file.write(innerHtml)
+
+    print(f'{req_id} saved soup')
+    
+
 
 
     try:
-
         response=scrape_data(tracking_number_text,soup)
         print(f'{req_id} Driver {index} Got Response')
         return response
