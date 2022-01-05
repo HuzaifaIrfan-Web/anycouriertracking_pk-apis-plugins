@@ -43,7 +43,7 @@ drivers=[]
 
 
 firefox_opt = FirefoxOptions()
-# firefox_opt.add_argument("--headless")
+firefox_opt.add_argument("--headless")
 firefox_opt.set_preference('permissions.default.stylesheet', 2)
 firefox_opt.set_preference('permissions.default.image', 2)
 firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
