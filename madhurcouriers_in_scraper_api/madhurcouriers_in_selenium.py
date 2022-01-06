@@ -185,6 +185,8 @@ def track(tracking_number_text):
 
 
     if not(new_url == old_url):
+        driver.get(url)
+
         print(f'{req_id} Driver {index} {new_url} not equal {old_url}')
             
         drivers[index]['use'] =None
