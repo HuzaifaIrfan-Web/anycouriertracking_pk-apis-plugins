@@ -10,88 +10,12 @@ import uuid
 
 try:
     from .stcourier_captcha_solver import captcha_solver
-    from .settings import use_firefox
+    from .driver_controller import *
+
 except:
     from stcourier_captcha_solver import captcha_solver
-    from settings import use_firefox
-
-
-
-import time
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-
-
-
-
-# selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
-# print(selenium_hub_host_name)
-
-
-# import urllib
-# request_url = urllib.request.urlopen(host_name)
-# print(request_url.read())
-
-# time.sleep(5)
-
-
-import datetime
-
-
-drivers=[]
-
-
-firefox_opt = FirefoxOptions()
-firefox_opt.add_argument("--headless")
-firefox_opt.set_preference('permissions.default.stylesheet', 2)
-firefox_opt.set_preference('permissions.default.image', 2)
-firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
-
-
-from selenium.webdriver.chrome.options import Options
-chrome_opt = Options()
-chrome_opt.add_argument('--headless')
-chrome_opt.add_argument('--no-sandbox')
-chrome_opt.add_argument('--disable-dev-sh--usage')
-
-url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
-
-
-for i in range(0,1):
-
-    print(datetime.datetime.now(), end=' ')
-
-
-
-    if use_firefox:
-        print(f'stcourier Setting Up Firefox Selenium Driver {i}')
-        driver = webdriver.Firefox(options=firefox_opt)
-    else:
-        print(f'stcourier Setting Up Chrome Selenium Driver {i}')
-        driver = webdriver.Chrome(options=chrome_opt)
-
-
-    driver.get(url)
-
-
-    drivers.append({'use':None,'driver':driver,'epoch':0})
-
-    print(datetime.datetime.now(), end=' ')
-
-    if use_firefox:
-
-        print(f'stcourier Started Firefox Selenium Driver {i}')
+    from driver_controller import *
     
-    else:
-
-        print(f'stcourier Started Chrome Selenium Driver {i}')
-
-
 
 
 
@@ -152,42 +76,6 @@ def check_validation(driver):
     except:
         print('stcourier Validation correct')
         return True
-
-
-
-def select_driver(req_id):
-
-    selecting=True
-
-    while selecting:
-
-        for i,driver_obj in enumerate(drivers):
-            
-            if driver_obj['use'] ==None:
-
-                driver_obj['use']=req_id
-
-                epoch=int(datetime.datetime.now().timestamp())
-                # print(epoch)
-                driver_obj['epoch']=epoch
-
-                driver=driver_obj['driver']
-                index=i
-                print(datetime.datetime.now(), end=f' {req_id} ')
-                print(f'stcourier {i} Selenium Driver Selected')
-
-
-                selecting=False
-                break
-            else:
-                epoch=int(datetime.datetime.now().timestamp())
-                # print(epoch)
-                if (epoch > driver_obj['epoch'] +20):
-                    print(datetime.datetime.now(), end=' ')
-                    print(f'stcourier {i} Driver Use TimeOut')
-                    driver_obj['use'] =None
-
-    return index, driver
 
 
 
@@ -284,13 +172,36 @@ def scrape_data(soup):
         except:
             pass
 
+    try:
+        Current_Status=DELIVERY_STATUS[0]
+    except:
+        Current_Status=''
 
-    Current_Status=DELIVERY_STATUS[0]
-    Orgin_SRC=DELIVERY_STATUS[1]
-    Destination=DELIVERY_STATUS[2]
-    Consignment=DELIVERY_STATUS[3]
-    Book_DateTime=DELIVERY_STATUS[4]
-    Delivery_DateTime=DELIVERY_STATUS[5]
+    try:
+        Orgin_SRC=DELIVERY_STATUS[1]
+    except:
+        Orgin_SRC=''
+
+    try:
+        Destination=DELIVERY_STATUS[2]
+    except:
+        Destination=''
+
+    try:
+        Consignment=DELIVERY_STATUS[3]
+    except:
+        Consignment=''
+
+    try:
+        Book_DateTime=DELIVERY_STATUS[4] 
+    except:
+        Book_DateTime=''
+
+    try:
+        Delivery_DateTime=DELIVERY_STATUS[5]
+    except:
+        Delivery_DateTime=''
+
 
     DELIVERY_STATUS_obj={
 
@@ -320,23 +231,43 @@ def scrape_data(soup):
     track_histories=[]
 
     for track_history_li in track_histories_li:
-        date_time=track_history_li.find('div', class_="tracking-date")
-        date=date_time.find('h5', class_="tracking-title").text
-        timestr=date_time.find('p').text
+        
+
+        try:
+            date_time=track_history_li.find('div', class_="tracking-date")
+            date=date_time.find('h5', class_="tracking-title").text
+
+                    
+        except:
+            date=''  
+        try:
+            timestr=date_time.find('p').text
+
+        except:
+            timestr=''  
         # print(date.text)
         # print(timestr.text)
         
-
-        panel=track_history_li.find('div', class_="tracking-panel")
+        try:
+            panel=track_history_li.find('div', class_="tracking-panel")
         
-        tracking_title=panel.find('h4').text
-        # print(tracking_title)
 
-        span_el=panel.find('span').text
+            tracking_title=panel.find('h4').text
+        # print(tracking_title)
+        except:
+            tracking_title=''     
+
+        try:
+            span_el=panel.find('span').text
+        except:
+            span_el=''
         # print(span_el)
 
-        p_el=" ".join(panel.find('p').text.replace(span_el, "").split())
+        try:
+            p_el=" ".join(panel.find('p').text.replace(span_el, "").split())
         # print(p_el)
+        except:
+            p_el=''
 
         track_history={
             "date":date,

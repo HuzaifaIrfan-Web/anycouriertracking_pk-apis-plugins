@@ -178,6 +178,17 @@ Invalid Tracking Number
     return $content;
 }
 
+if ($httpCode == 404) {
+    
+    $content .="
+<h2 align='center'>
+Tracking Details Not Found
+</h2>
+";
+
+    return $content;
+}
+
 curl_close($ch);
 
 // $res = json_decode(file_get_contents($madhurcouriers_in_tracking_api_url), true);
@@ -274,14 +285,14 @@ $content .='
     <td >
     ';
 
-$content .=$item[1];
+$content .=$item['Date'];
 
 $content .='
     </td>
     <td >
    ';
 
-$content .=$item[2];
+$content .=$item['Transaction_Type'];
 
 
 $content .='
@@ -290,7 +301,7 @@ $content .='
      <td >
    ';
 
-$content .=$item[3];
+$content .=$item['Status'];
 
 
 $content .='
@@ -299,7 +310,7 @@ $content .='
     <td >
    ';
 
-$content .=$item[4];
+$content .=$item['Remark'];
 
 
 $content .='
