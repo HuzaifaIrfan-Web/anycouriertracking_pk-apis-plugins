@@ -76,7 +76,7 @@ ENV PORT=5000
 EXPOSE 5000
 
 
-CMD gunicorn app:app -w 1 --threads 4 --bind 0.0.0.0:$PORT --timeout 120
+CMD gunicorn app:app -w 1 --threads 4 --bind 0.0.0.0:$PORT --timeout 30
 
 
 
