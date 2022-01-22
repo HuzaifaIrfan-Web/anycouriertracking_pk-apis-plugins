@@ -291,7 +291,7 @@ $track_histories=$res['track_histories'];
 if($track_histories){
 
 $content .="
-<div class='track-history'>
+<div class='track-history' style='overflow-x:scroll;' >
 <h3>
 Track History:
 </h3>
@@ -476,7 +476,7 @@ $stcourier_tracking_details_url= get_option('stcourier_tracking_details_url','/i
 
  $content .="
 '>
-<div style='display:flex; flex-direction:column;'>
+<div style='display:flex; flex-direction:column; width:90%;'>
 
  <h3 for='tnum'>Tracking Number:</h3>
  <div style='display:flex; '>

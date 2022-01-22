@@ -238,7 +238,7 @@ $track_histories=array_reverse($res['track_histories']);
 if($track_histories){
 
 $content .="
-<div class='track-history'>
+<div class='track-history'  style='overflow-x:scroll;'>
 <h3>
 Track History:
 </h3>
@@ -413,7 +413,7 @@ $madhurcouriers_in_tracking_details_url= get_option('madhurcouriers_in_tracking_
 
  $content .="
 '>
-<div style='display:flex; flex-direction:column;'>
+<div style='display:flex; flex-direction:column; width:90%;'>
 
  <h3 for='tnum'>Tracking Number:</h3>
  <div style='display:flex; '>
