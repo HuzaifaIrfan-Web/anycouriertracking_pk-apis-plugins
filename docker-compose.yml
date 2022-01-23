@@ -64,8 +64,8 @@ services:
     
     restart: always
 
-    # volumes:
-    #   - /dev/shm:/dev/shm
+    volumes:
+      - /dev/shm:/dev/shm
 
     # depends_on:
     #   - selenium-hub
