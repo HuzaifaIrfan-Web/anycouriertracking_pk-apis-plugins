@@ -5,10 +5,10 @@ import json
 urls = [
 ]
 
-host='server.skiie.com'
+# host='server.skiie.com:5000'
 # host='localhost:8000'
 # host='localhost'
-
+host='66.70.140.61:5000'
 
 
 for i in range(0,2):

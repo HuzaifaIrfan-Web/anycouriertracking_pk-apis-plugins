@@ -5,10 +5,10 @@ import json
 urls = [
 ]
 
-host='server.skiie.com'
+# host='server.skiie.com:5000'
 # host='0.0.0.0:5000'
-host='localhost'
-
+# host='localhost'
+host='66.70.140.61:5000'
 
 url=f'http://{host}/track/stcourier_scraper_api?tnum=63346811006'
 
@@ -35,6 +35,7 @@ for res in responses:
     # print(res.content)
     try:
         d = json.loads(res.content)
+        print(d['tnum'])
         print(d.keys())
         # print(d)
     except:
