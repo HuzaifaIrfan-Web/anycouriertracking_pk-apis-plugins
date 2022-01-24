@@ -7,9 +7,9 @@ services:
     image: selenium/hub:3.141.59-20210929
     container_name: selenium_hub
 
-    # environment:
-      # - GRID_TIMEOUT=20
-      # - GRID_BROWSER_TIMEOUT=20
+    environment:
+      - GRID_TIMEOUT=0
+      - GRID_BROWSER_TIMEOUT=0
       # - GRID_MAX_SESSION=2
       
     restart: always
