@@ -6,13 +6,86 @@ services:
     ports:
       - "5000:5000"
 
+  
+    depends_on:
+      - chrome_container
+
+    # volumes:
+    #   - /dev/shm:/dev/shm
+
+    environment:
+      - HUB_URI=http://host.docker.internal:4444/wd/hub
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+
+
+  selenium_hub:
+    # hostname: "selenium-hub.local"
+    image: selenium/hub:3.141.59-20210929
+    container_name: selenium_hub
+
+    # environment:
+      # - GRID_TIMEOUT=20
+      # - GRID_BROWSER_TIMEOUT=20
+      # - GRID_MAX_SESSION=2
+      
+    restart: always
+    ports:
+      - "4444:4444"
+    networks:
+      # - selenium-hub
+      - grid 
+
+  chrome_container:
+    image: selenium/node-chrome-debug:3.141.59-20210929
+    container_name: chrome_container
+    depends_on:
+      - selenium_hub
+    environment:
+      - HUB_HOST=selenium_hub
+      - HUB_PORT=4444
+      - NODE_MAX_SESSION=10
+      - NODE_MAX_INSTANCES=10
+
     volumes:
       - /dev/shm:/dev/shm
 
-    # environment:
-    #   - HUB_URI=http://host.docker.internal:4444/wd/hub
 
-    # extra_hosts:
-    #   - "host.docker.internal:host-gateway"
+    restart: always
+    
 
+    ports:
+      - "5900:5900"
+
+    networks:
+      - grid 
+
+
+  # firefox:
+  #   image: selenium/node-firefox-debug:3.141.59-20210929
+  #   depends_on:
+  #     - selenium-hub
+  #   environment:
+  #     - HUB_HOST=selenium-hub
+  #     - HUB_PORT=4444
+  #     - NODE_MAX_SESSION=10
+  #     - NODE_MAX_INSTANCES=10
+
+  #   volumes:
+  #     - /dev/shm:/dev/shm
+
+
+  #   restart: always
+    
+
+  #   ports:
+  #     - "5900:5900"
+
+  #   networks:
+  #     - grid 
+
+networks:
+  grid:
 

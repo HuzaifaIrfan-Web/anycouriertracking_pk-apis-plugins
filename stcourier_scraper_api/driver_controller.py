@@ -1,4 +1,5 @@
 import time
+import os
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -16,8 +17,8 @@ except:
     from settings import use_firefox
 
 
-# selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
-# print(selenium_hub_host_name)
+selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
+print(selenium_hub_host_name)
 
 
 # import urllib
@@ -48,6 +49,7 @@ chrome_opt.add_argument('--disable-dev-sh--usage')
 
 url='http://www.erpstcourier.com/awb_tracking2.php?keyword='
 
+time.sleep(5)
 
 for i in range(0,1):
 
@@ -55,12 +57,21 @@ for i in range(0,1):
 
 
 
-    if use_firefox:
-        print(f'stcourier Setting Up Firefox Selenium Driver {i}')
-        driver = webdriver.Firefox(options=firefox_opt)
-    else:
-        print(f'stcourier Setting Up Chrome Selenium Driver {i}')
-        driver = webdriver.Chrome(options=chrome_opt)
+    # if use_firefox:
+    #     print(f'stcourier Setting Up Firefox Selenium Driver {i}')
+    #     driver = webdriver.Firefox(options=firefox_opt)
+    # else:
+    #     print(f'stcourier Setting Up Chrome Selenium Driver {i}')
+    #     driver = webdriver.Chrome(options=chrome_opt)
+
+    print(f'stcourier Setting Up Chrome Selenium Driver {i}')
+    
+    driver = webdriver.Remote(
+    command_executor=selenium_hub_host_name,
+    desired_capabilities={
+                "browserName": "chrome",
+            })
+    
 
 
     driver.get(url)

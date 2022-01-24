@@ -1,4 +1,4 @@
 
 
-use_firefox=True
+use_firefox=False
 

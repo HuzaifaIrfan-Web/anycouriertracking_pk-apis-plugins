@@ -1,5 +1,6 @@
 import datetime
 import time
+import os
 
 
 from selenium import webdriver
@@ -11,6 +12,9 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
 url='https://www.madhurcouriers.in/CNoteTracking'
+
+selenium_hub_host_name = os.environ.get('HUB_URI','http://127.0.0.1:4444/wd/hub')
+print(selenium_hub_host_name)
 
 
 try:
@@ -37,6 +41,8 @@ chrome_opt.add_argument('--headless')
 chrome_opt.add_argument('--no-sandbox')
 chrome_opt.add_argument('--disable-dev-sh--usage')
 
+time.sleep(5)
+
 
 for i in range(0,1):
 
@@ -44,12 +50,22 @@ for i in range(0,1):
 
 
 
-    if use_firefox:
-        print(f'madhurcouriers_in Setting Up Firefox Selenium Driver {i}')
-        driver = webdriver.Firefox(options=firefox_opt)
-    else:
-        print(f'madhurcouriers_in Setting Up Chrome Selenium Driver {i}')
-        driver = webdriver.Chrome(options=chrome_opt)
+    # if use_firefox:
+    #     print(f'madhurcouriers_in Setting Up Firefox Selenium Driver {i}')
+    #     driver = webdriver.Firefox(options=firefox_opt)
+    # else:
+    #     print(f'madhurcouriers_in Setting Up Chrome Selenium Driver {i}')
+    #     driver = webdriver.Chrome(options=chrome_opt)
+
+
+    print(f'madhur Setting Up Chrome Selenium Driver {i}')
+    
+    driver = webdriver.Remote(
+    command_executor=selenium_hub_host_name,
+    desired_capabilities={
+                "browserName": "chrome",
+            })
+    
 
 
     driver.get(url)
