@@ -214,17 +214,21 @@ def scrape_data(soup):
 
 }
 
+    track_histories_li=[]
+
+    try:
+
+        track_history=soup.find("div", class_="white-box b-l")
+
+        tracking_number=track_history.find_all("h4")[0].find("span").text
 
 
-    track_history=soup.find("div", class_="white-box b-l")
 
-    tracking_number=track_history.find_all("h4")[0].find("span").text
+        track_histories_ul=track_history.find("ul", class_="tracking")
+        track_histories_li=track_histories_ul.find_all("li")
 
-
-
-    track_histories_ul=track_history.find("ul", class_="tracking")
-    track_histories_li=track_histories_ul.find_all("li")
-
+    except:
+        print('timeline not found')
 
 
 
