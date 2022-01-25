@@ -175,6 +175,8 @@ class Driver_Controller():
         if self.check_driver_use(driver_index,req_id):
             print(f'{driver_index} Driver refreshing by {req_id}')
             self.drivers[driver_index]['driver'].get(self.url)
+            refreshed=int(datetime.datetime.now().timestamp())
+            self.drivers[driver_index]['refreshed']=refreshed
 
             time.sleep(5)
     
