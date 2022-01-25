@@ -19,9 +19,9 @@ services:
       - grid 
     
 
-  chrome_container:
+  chrome_debug_node:
     image: selenium/node-chrome-debug:3.141.59-20210929
-    container_name: chrome_container
+    container_name: chrome_debug_node
     depends_on:
       - selenium_hub
     environment:
@@ -79,7 +79,7 @@ services:
 
 
     depends_on:
-      - chrome_container
+      - chrome_debug_node
     environment:
       - HUB_URI=http://host.docker.internal:4444/wd/hub
 
@@ -102,7 +102,7 @@ services:
 
 
     depends_on:
-      - chrome_container
+      - chrome_debug_node
     environment:
       - HUB_URI=http://host.docker.internal:4444/wd/hub
 
@@ -135,6 +135,7 @@ services:
     
     depends_on:
       - stcourier_scraper_api
+      - madhurcouriers_in_scraper_api
 
 
     networks:
