@@ -44,4 +44,5 @@ EXPOSE 5000
 
 
 
-CMD gunicorn app:app -k uvicorn.workers.UvicornWorker -w 1 --threads 4 --timeout 30 -b 0.0.0.0:$PORT
+# CMD gunicorn app:app -k uvicorn.workers.UvicornWorker -w 1 --threads 2 --timeout 60 -b 0.0.0.0:$PORT
+CMD gunicorn app:app -k app.MyUvicornWorker -w 1 --threads 2 --timeout 60 -b 0.0.0.0:$PORT

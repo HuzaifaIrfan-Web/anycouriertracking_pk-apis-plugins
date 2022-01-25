@@ -2,6 +2,15 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 
+import uvicorn as uvicorn
+from uvicorn.workers import UvicornWorker
+
+
+class MyUvicornWorker(UvicornWorker):
+    CONFIG_KWARGS = {
+        "log_config": "logging.yaml",
+    }
+
 # # from stcourier_chrome_selenium import track
 
 # from .stcourier_firefox_selenium import track as return_details

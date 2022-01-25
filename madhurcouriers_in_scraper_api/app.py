@@ -2,15 +2,19 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 
-
-
-
+import uvicorn as uvicorn
+from uvicorn.workers import UvicornWorker
 
 try:
     from .madhurcouriers_in_selenium import track as return_details
 except:
     from madhurcouriers_in_selenium import track as return_details
  
+
+class MyUvicornWorker(UvicornWorker):
+    CONFIG_KWARGS = {
+        "log_config": "logging.yaml",
+    }
 
 
 app = FastAPI()
@@ -27,6 +31,7 @@ def read_item(item_id: int, q: Optional[str] = None):
 
 @app.get("/track/madhurcouriers_in_scraper_api")
 def track_query(tnum: Optional[str] = None):
+    # logger.info("logging from the root logger")
 
     try:
         tracking_number=tnum

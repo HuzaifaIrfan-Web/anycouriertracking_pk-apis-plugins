@@ -37,9 +37,14 @@ firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
 
 from selenium.webdriver.chrome.options import Options
 chrome_opt = Options()
-chrome_opt.add_argument('--headless')
+# chrome_opt.add_argument('--headless')
 chrome_opt.add_argument('--no-sandbox')
 chrome_opt.add_argument('--disable-dev-sh--usage')
+chrome_prefs = {}
+chrome_prefs["profile.default_content_settings"] = {"images": 2}
+chrome_prefs["profile.managed_default_content_settings"] = {"images": 2}
+chrome_opt.experimental_options["prefs"] = chrome_prefs
+
 
 time.sleep(5)
 
@@ -64,7 +69,7 @@ for i in range(0,1):
     command_executor=selenium_hub_host_name,
     desired_capabilities={
                 "browserName": "chrome",
-            })
+            },options=chrome_opt)
     
 
 
