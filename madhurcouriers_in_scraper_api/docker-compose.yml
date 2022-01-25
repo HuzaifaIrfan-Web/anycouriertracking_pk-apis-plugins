@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   madhurcouriers_in_scraper_api:
+    container_name: madhurcouriers_in_scraper_api
     build: .
     restart: always
     ports:
@@ -8,7 +9,7 @@ services:
 
   
     depends_on:
-      - chrome_container
+      - chrome_debug_node
 
     # volumes:
     #   - /dev/shm:/dev/shm
@@ -38,9 +39,9 @@ services:
       # - selenium-hub
       - grid 
 
-  chrome_container:
+  chrome_debug_node:
     image: selenium/node-chrome-debug:3.141.59-20210929
-    container_name: chrome_container
+    container_name: chrome_debug_node
     depends_on:
       - selenium_hub
     environment:

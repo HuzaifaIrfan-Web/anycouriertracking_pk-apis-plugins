@@ -2,8 +2,14 @@
 from bs4 import BeautifulSoup
 
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 import os
+
+import time
 
 
 import uuid
@@ -12,16 +18,16 @@ import uuid
 
 try:
 
-    from .driver_controller import *
+    from .Driver_Controller import Driver_Controller
 
 except:
 
-    from driver_controller import *
+    from Driver_Controller import Driver_Controller
     
 
 
 
-
+driver_controller=Driver_Controller()
 
 
 
@@ -37,9 +43,9 @@ def track(tracking_number_text):
     selecting=True
     while selecting:
 
-        index,driver=select_driver(req_id)
+        driver_index,driver=driver_controller.select_driver(req_id)
 
-        if drivers[index]['use']==req_id:
+        if driver_controller.check_driver_use(driver_index,req_id):
             selecting=False
 
 
@@ -50,15 +56,15 @@ def track(tracking_number_text):
     
 
 
-    if not drivers[index]['use']==req_id:
-        print(f'{req_id} driver {index} not using.')
+    if not driver_controller.check_driver_use(driver_index,req_id):
+        print(f'{req_id} driver {driver_index} not using.')
         return track(tracking_number_text)
 
 
 
 
     old_url = str(driver.current_url)
-    print(f'{req_id} Driver {index} Old URL {old_url}')
+    print(f'{req_id} Driver {driver_index} Old URL {old_url}')
 
 
     
@@ -76,15 +82,16 @@ def track(tracking_number_text):
 
 
     new_url = str(driver.current_url)
-    print(f'{req_id} Driver {index} New URL {new_url}')
+    print(f'{req_id} Driver {driver_index} New URL {new_url}')
 
 
     if not(new_url == old_url):
-        driver.get(url)
+        
+        driver_controller.refresh_driver(driver_index,req_id)
 
-        print(f'{req_id} Driver {index} {new_url} not equal {old_url}')
+        print(f'{req_id} Driver {driver_index} {new_url} not equal {old_url}')
             
-        drivers[index]['use'] =None
+        driver_controller.release_driver(driver_index,req_id)
 
         return track(tracking_number_text)
 
@@ -121,7 +128,8 @@ def track(tracking_number_text):
 
 
  
-    drivers[index]['use'] =None
+    driver_controller.release_driver(driver_index,req_id)
+    
     
     soup = BeautifulSoup(innerHtml, 'html.parser')
     # print(f'{req_id} soup')
@@ -136,11 +144,11 @@ def track(tracking_number_text):
 
     try:
         response=scrape_data(tracking_number_text,soup)
-        print(f'{req_id} Driver {index} Got Response')
+        print(f'{req_id} Driver {driver_index} Got Response')
         return response
     
     except:
-        print(f'{req_id} Driver {index} Got NO Response')
+        print(f'{req_id} Driver {driver_index} Got NO Response')
         raise Exception
         # return {'msg':'Not Found'}
 

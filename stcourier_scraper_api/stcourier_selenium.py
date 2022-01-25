@@ -1,22 +1,26 @@
 
 from bs4 import BeautifulSoup
 
-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 import os
+import time
 
 
 import uuid
 
 try:
     from .stcourier_captcha_solver import captcha_solver
-    from .driver_controller import *
+    from .Driver_Controller import Driver_Controller
 
 except:
     from stcourier_captcha_solver import captcha_solver
-    from driver_controller import *
+    from Driver_Controller import Driver_Controller
     
-
+driver_controller=Driver_Controller()
 
 
 def return_captcha_image(driver):
@@ -94,9 +98,9 @@ def track(tracking_number_text):
     selecting=True
     while selecting:
 
-        index,driver=select_driver(req_id)
+        driver_index,driver=driver_controller.select_driver(req_id)
 
-        if drivers[index]['use']==req_id:
+        if driver_controller.check_driver_use(driver_index,req_id):
             selecting=False
 
 
@@ -111,7 +115,8 @@ def track(tracking_number_text):
     running=True
     while(running):
 
-        if not drivers[index]['use']==req_id:
+        if not driver_controller.check_driver_use(driver_index,req_id):
+            print(f'{req_id} driver {driver_index} not using.')
             return track(tracking_number_text)
 
         eleUserMessage = driver.find_element(By.ID, "keyword")
@@ -135,8 +140,9 @@ def track(tracking_number_text):
     innerHtml=body.get_attribute('innerHTML')
 
     # driver.quit()
-    drivers[index]['use'] =None
-    
+
+    driver_controller.release_driver(driver_index,req_id)
+
     soup = BeautifulSoup(innerHtml, 'html.parser')
 
 
