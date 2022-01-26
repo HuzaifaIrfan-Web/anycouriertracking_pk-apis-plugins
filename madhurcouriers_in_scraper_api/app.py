@@ -58,7 +58,8 @@ def track_query(tnum: Optional[str] = None):
 
 
 
-
+if __name__ == '__main__':
+      uvicorn.run(app, port=5000)
 
 # import json
 # from flask import Flask, render_template, request, jsonify, redirect

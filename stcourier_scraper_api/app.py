@@ -66,6 +66,8 @@ def track_query(tnum: Optional[str] = None):
     return  response
 
 
+if __name__ == '__main__':
+      uvicorn.run(app, port=5000)
 
 
 # import json
