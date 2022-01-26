@@ -13,8 +13,8 @@ services:
       # - GRID_MAX_SESSION=2
       
     restart: always
-    ports:
-      - "4444:4444"
+    # ports:
+    #   - "4444:4444"
     networks:
       - grid 
     
@@ -81,16 +81,20 @@ services:
     depends_on:
       - chrome_debug_node
     environment:
-      - HUB_URI=http://host.docker.internal:4444/wd/hub
+      - HUB_URI=http://selenium_hub:4444/wd/hub
+
+    # environment:
+    #   - HUB_URI=http://host.docker.internal:4444/wd/hub
 
 
 
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
 
 
     networks:
       - apis
+      - grid
 
 
   stcourier_scraper_api:
@@ -104,12 +108,14 @@ services:
     depends_on:
       - chrome_debug_node
     environment:
-      - HUB_URI=http://host.docker.internal:4444/wd/hub
+      - HUB_URI=http://selenium_hub:4444/wd/hub
+    # environment:
+    #   - HUB_URI=http://host.docker.internal:4444/wd/hub
 
 
 
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
 
 
     # ports:
@@ -118,6 +124,7 @@ services:
     
     networks:
       - apis
+      - grid
 
 
   nginx: 
