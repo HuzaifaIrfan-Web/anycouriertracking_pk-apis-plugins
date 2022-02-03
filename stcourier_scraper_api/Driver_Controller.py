@@ -20,12 +20,10 @@ print(selenium_hub_host_name)
 
 
 use_firefox=False
+use_selenium_hub=True
+num_of_drivers=1
 
-# import urllib
-# request_url = urllib.request.urlopen(host_name)
-# print(request_url.read())
 
-# time.sleep(5)
 
 
 import datetime
@@ -34,7 +32,7 @@ import datetime
 
 
 firefox_opt = FirefoxOptions()
-firefox_opt.add_argument("--headless")
+# firefox_opt.add_argument("--headless")
 firefox_opt.set_preference('permissions.default.stylesheet', 2)
 firefox_opt.set_preference('permissions.default.image', 2)
 firefox_opt.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
@@ -67,28 +65,33 @@ class Driver_Controller():
 
         
 
-        for i in range(0,1):
+        for i in range(0,num_of_drivers):
 
             print(datetime.datetime.now(), end=' ')
 
+            if use_selenium_hub:
+
+               
+                if use_firefox:
+                    print(f'Setting Up Firefox Selenium Driver {i}')
+                    driver = webdriver.Remote(command_executor=selenium_hub_host_name,desired_capabilities={"browserName": "firefox",},options=firefox_opt)
+                else:
+                    print(f'Setting Up Chrome Selenium Driver {i}')                    
+                    driver = webdriver.Remote(command_executor=selenium_hub_host_name,desired_capabilities={"browserName": "chrome",},options=chrome_opt)
 
 
-            # if use_firefox:
-            #     print(f'madhurcouriers_in Setting Up Firefox Selenium Driver {i}')
-            #     driver = webdriver.Firefox(options=firefox_opt)
-            # else:
-            #     print(f'madhurcouriers_in Setting Up Chrome Selenium Driver {i}')
-            #     driver = webdriver.Chrome(options=chrome_opt)
+
+            else:
+
+                if use_firefox:
+                    print(f'Setting Up Firefox Selenium Driver {i}')
+                    driver = webdriver.Firefox(options=firefox_opt)
+                else:
+                    print(f'Setting Up Chrome Selenium Driver {i}')
+                    driver = webdriver.Chrome(options=chrome_opt)
 
 
-            print(f'Setting Up Chrome Selenium Driver {i}')
-            
-            driver = webdriver.Remote(
-            command_executor=selenium_hub_host_name,
-            desired_capabilities={
-                        "browserName": "chrome",
-                    },options=chrome_opt)
-            
+
 
 
             driver.get(self.url)
@@ -138,14 +141,13 @@ class Driver_Controller():
                     print(f'{i} Selenium Driver Selected')
 
 
-                    # refreshed=int(datetime.datetime.now().timestamp())
+                    refreshed=int(datetime.datetime.now().timestamp())
                     # print(epoch)
-                    # if (refreshed > driver_obj['refreshed'] +3600 ):
-                    #     print(datetime.datetime.now(), end=' ')
-                    #     print('hour passed refreshing')
-                    #     self.refresh_driver(driver_index,req_id)
+                    if (refreshed > driver_obj['refreshed'] +3600 ):
+                        print(datetime.datetime.now(), end=' ')
+                        print('hour passed refreshing')
+                        self.refresh_driver(driver_index,req_id)
 
-                    # self.refresh_driver(driver_index,req_id)
                         
 
 
@@ -188,5 +190,4 @@ class Driver_Controller():
             self.drivers[driver_index]['refreshed']=refreshed
 
             time.sleep(5)
-    
     

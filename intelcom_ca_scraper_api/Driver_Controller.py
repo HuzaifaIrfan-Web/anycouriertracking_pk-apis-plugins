@@ -55,7 +55,7 @@ class Driver_Controller():
 
         self.drivers=[]
 
-        self.url='https://www.madhurcouriers.in/CNoteTracking'
+        self.url=""
 
 
         
@@ -89,7 +89,7 @@ class Driver_Controller():
 
 
 
-            driver.get(self.url)
+            # driver.get(self.url)
 
             refreshed=int(datetime.datetime.now().timestamp())
 

@@ -1,7 +1,7 @@
 version: '3.7'
 services:
-  stcourier_scraper_api:
-    container_name: stcourier_scraper_api
+  intelcom_ca_scraper_api:
+    container_name: intelcom_ca_scraper_api
     build: .
     restart: always
     ports:
@@ -16,12 +16,12 @@ services:
 
     environment:
       - HUB_URI=http://selenium_hub:4444/wd/hub
-
+      
+    networks:
+      - grid 
     # extra_hosts:
     #   - "host.docker.internal:host-gateway"
 
-    networks:
-      - grid 
 
 
   selenium_hub:

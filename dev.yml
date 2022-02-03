@@ -127,6 +127,33 @@ services:
       - grid
 
 
+  intelcom_ca_scraper_api:
+    build: ./intelcom_ca_scraper_api
+    container_name: intelcom_ca_scraper_api
+
+    
+    restart: always
+
+
+    depends_on:
+      - chrome_debug_node
+    environment:
+      - HUB_URI=http://selenium_hub:4444/wd/hub
+
+    # environment:
+    #   - HUB_URI=http://host.docker.internal:4444/wd/hub
+
+
+
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+
+
+    networks:
+      - apis
+      - grid
+
+
   nginx: 
     image: nginx:1.21.4
     container_name: anycouriertracking_apis_nginx
@@ -143,6 +170,7 @@ services:
     depends_on:
       - stcourier_scraper_api
       - madhurcouriers_in_scraper_api
+      - intelcom_ca_scraper_api
 
 
     networks:
