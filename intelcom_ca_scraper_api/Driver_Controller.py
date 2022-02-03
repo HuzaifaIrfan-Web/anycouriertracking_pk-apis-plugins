@@ -136,12 +136,12 @@ class Driver_Controller():
                     print(f'{i} Selenium Driver Selected')
 
 
-                    refreshed=int(datetime.datetime.now().timestamp())
-                    # print(epoch)
-                    if (refreshed > driver_obj['refreshed'] +3600 ):
-                        print(datetime.datetime.now(), end=' ')
-                        print('hour passed refreshing')
-                        self.refresh_driver(driver_index,req_id)
+                    # refreshed=int(datetime.datetime.now().timestamp())
+                    # # print(epoch)
+                    # if (refreshed > driver_obj['refreshed'] +3600 ):
+                    #     print(datetime.datetime.now(), end=' ')
+                    #     print('hour passed refreshing')
+                    #     self.refresh_driver(driver_index,req_id)
 
                     # self.refresh_driver(driver_index,req_id)
                         

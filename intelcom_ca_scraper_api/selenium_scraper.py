@@ -16,13 +16,9 @@ import uuid
 
 
 
-try:
 
-    from .Driver_Controller import Driver_Controller
 
-except:
-
-    from Driver_Controller import Driver_Controller
+from Driver_Controller import Driver_Controller
     
 
 
