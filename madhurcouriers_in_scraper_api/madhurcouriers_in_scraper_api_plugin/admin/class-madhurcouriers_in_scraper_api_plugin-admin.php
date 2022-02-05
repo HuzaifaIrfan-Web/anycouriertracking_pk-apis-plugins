@@ -52,6 +52,19 @@ class madhurcouriers_in_scraper_api_plugin_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+
+	function	madhurcouriers_in_scraper_admin_page()
+		{
+			require_once 'partials/madhurcouriers_in_scraper_api_plugin-admin-display.php';
+		}
+
+				
+		function madhurcouriers_in_scraper_admin(){
+			add_menu_page('Madhurcouriers.in Scraper Admin','Madhurcouriers.in Scraper Admin','manage_options','madhurcouriers_in-scraper-admin','madhurcouriers_in_scraper_admin_page','',200);
+		}
+
+		add_action('admin_menu','madhurcouriers_in_scraper_admin');
+
 	}
 
 	/**

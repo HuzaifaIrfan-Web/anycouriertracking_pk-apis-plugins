@@ -75,7 +75,17 @@ class stcourier_scraper_api_plugin_Public {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/stcourier_scraper_api_plugin-public.css', array(), $this->version, 'all' );
 
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css');
+
+		
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/all.min.css');
+
+				
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/all.css', array(), $this->version, 'all' );
+
 	}
+
+
 
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
@@ -97,6 +107,12 @@ class stcourier_scraper_api_plugin_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/stcourier_scraper_api_plugin-public.js', array( 'jquery' ), $this->version, false );
+
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
+
+		
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
+
 
 	}
 

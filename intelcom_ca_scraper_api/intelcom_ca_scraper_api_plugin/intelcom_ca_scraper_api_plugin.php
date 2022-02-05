@@ -45,20 +45,6 @@ define( 'intelcom_ca_SCRAPER_API_PLUGIN_VERSION', '1.0.0' );
 function activate_intelcom_ca_scraper_api_plugin() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-intelcom_ca_scraper_api_plugin-activator.php';
 	intelcom_ca_scraper_api_plugin_Activator::activate();
-
-
-           $post = array(     
-             'post_content'   => '
-            [intelcom_ca_track_form]
-            [intelcom_ca_track_details]
-
-             ', //content of page
-             'post_title'     =>'Intelcom CA Shipment Details', //title of page
-             'post_status'    =>  'publish' , //status of page - publish or draft
-             'post_type'      =>  'page'  // type of post
-   );
-   wp_insert_post( $post ); // creates page
-
 }
 
 /**
@@ -101,5 +87,7 @@ run_intelcom_ca_scraper_api_plugin();
 
 
 // Plugin Code Start
+
+
 
 

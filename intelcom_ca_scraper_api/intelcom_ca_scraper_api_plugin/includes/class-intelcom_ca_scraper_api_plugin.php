@@ -111,6 +111,10 @@ class intelcom_ca_scraper_api_plugin {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-intelcom_ca_scraper_api_plugin-i18n.php';
 
+
+		
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-intelcom_ca_scraper_api_plugin-shortcode.php';
+
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */

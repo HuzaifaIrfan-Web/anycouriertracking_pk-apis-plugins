@@ -1,4 +1,248 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+
+    @import url("https://fonts.googleapis.com/css2?family=Muli&display=swap");
+
+    :root {
+      --line-border-fill: #01a7a7;
+      --line-border-empty: #BDBDBD;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    
+    h1 {
+      font-family: 'Muli', sans-serif;
+      color: #212121;
+      margin-bottom: 90px;
+    }
+    
+    .w-100{
+      width:100%;
+    }
+    
+    .fa-black-color{
+      color: #000000 ;
+      font-size: 1em;
+    }
+    .fa-html5 {
+      font-size: 1.8rem;
+      color: #ff5733;
+    }
+    .fa-css3-alt {
+      font-size: 1.8rem;
+      color: #264de4;
+    }
+    .fa-js {
+      font-size: 1.6rem;
+      color: #f7e018;
+    }
+    .fa-react {
+      font-size: 1.8rem;
+      color: #61dbfb;
+    }
+    
+    .step-container {
+      margin: auto;
+      text-align: center;
+    }
+    
+    .progress-container {
+      display: flex;
+      /* Show CSS Trick card for this */
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 30px;
+      max-width: 100%;
+      width: 550px;
+    }
+    
+    .progress-container::before {
+    
+      content: "";
+      background-color: var(--line-border-empty);
+      position: absolute;
+      top: 33%;
+      left: 0;
+      transform: translateY(-33%);
+      height: 6px;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      /* Put it Behind the numbers*/
+      z-index: -1 !important;
+    }
+    
+    .progress {
+      background-color: var(--line-border-fill);
+      position: absolute;
+      top: 33%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 6px;
+      width: 0%;
+      /* Put it Behind the numbers*/
+      z-index: -1;
+      transition: 0.4s ease;
+    }
+    
+    .circle {
+      background-color: #fff;
+      color: #999;
+      border-radius: 50%;
+      height: 50px;
+      width: 55px;
+      /* Show card with question: how to center
+     Stackoverflow, FB, whanever*/
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #b2bec3;
+      transition: 0.4s ease;
+      margin-right: 25px !important;
+    }
+    
+    
+    
+    
+    .circle-right{
+      margin-left: 65px;
+    
+    
+    }
+    
+    .circle.active {
+      border-color: var(--line-border-fill);
+      background-color: #01a7a7;
+      color: rgb(238, 238, 238);
+    }
+    
+    .btn {
+      background-color: var(--line-border-fill);
+      color:#FFFFFF;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 8px 30px;
+      margin: 5px;
+      font-size: 14px;
+    }
+    
+    .btn:active {
+      transform: scale(0.97);
+    }
+    
+    .btn:focus {
+      outline: 0;
+    }
+    
+    .btn:disabled {
+      background-color: var(--line-border-empty);
+      /* Can we make it better? Yeah*/
+      cursor: not-allowed;
+    }
+    
+    
+    
+    
+    
+    /* VERTICAL */
+    
+    .wrapper {
+    
+      width: 330px;
+      font-family: "Helvetica";
+      font-size: 14px;
+      border: 1px solid #ccc;
+    
+    }
+    .StepProgress {
+      position: relative;
+      padding-left: 45px;
+      list-style: none;
+    }
+    .StepProgress::before {
+      display: inline-block;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 10px;
+      height: 100%;
+      border-left: 2px solid #ccc;
+    }
+    .StepProgress-item {
+      position: relative;
+      counter-increment: list;
+    }
+    .StepProgress-item:not(:last-child) {
+      padding-bottom: 20px;
+    }
+    .StepProgress-item::before {
+      display: inline-block;
+      content: "";
+      position: absolute;
+      left: -30px;
+      height: 100%;
+      width: 10px;
+    }
+    .StepProgress-item::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: -42px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+    .StepProgress-item.is-done::before {
+      border-left: 0.5rem solid #01a7a7;;
+    }
+    .StepProgress-item.is-done::after {
+      display: flex;
+      content: "✔";
+      font-size: 1rem;
+      color: #fff !important;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      border: 1rem solid #01a7a7;;
+      background-color: #01a7a7;
+    }
+    .StepProgress-item.current::before {
+      border-left: 2px solid green;
+    }
+    .StepProgress-item.current::after {
+      content: counter(list);
+      padding-top: 1px;
+      width: 19px;
+      height: 18px;
+      top: -4px;
+      left: -40px;
+      font-size: 14px;
+      text-align: center;
+      color: green;
+      border: 2px solid green;
+      background-color: white;
+    }
+    .StepProgress strong {
+      display: block;
+    }
+    
+    
+    .card{
+      padding-top: 5%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+    
+      border-radius: 10px;
+    }
+    
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    

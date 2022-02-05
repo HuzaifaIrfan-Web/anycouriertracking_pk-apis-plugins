@@ -52,6 +52,19 @@ class stcourier_scraper_api_plugin_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		
+		function stcourier_scraper_admin_page()
+		{
+			require_once 'partials/stcourier_scraper_api_plugin-admin-display.php';
+		}
+
+		function stcourier_scraper_admin()
+		{
+    		add_menu_page('Stcourier Scraper Admin','Stcourier Scraper Admin','manage_options','stcourier-scraper-admin','stcourier_scraper_admin_page','',200);
+		}
+
+		add_action('admin_menu','stcourier_scraper_admin');
+
 	}
 
 	/**

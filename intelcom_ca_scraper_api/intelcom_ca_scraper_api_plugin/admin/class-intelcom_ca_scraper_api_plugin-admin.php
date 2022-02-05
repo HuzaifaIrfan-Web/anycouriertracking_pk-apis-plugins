@@ -52,6 +52,19 @@ class intelcom_ca_scraper_api_plugin_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+
+		function intelcom_ca_scraper_admin_page()
+		{
+			require_once 'partials/intelcom_ca_scraper_api_plugin-admin-display.php';
+		}
+
+		function intelcom_ca_scraper_admin()
+		{
+    		add_menu_page('Intelcom.ca Scraper Admin','Intelcom.ca Scraper Admin','manage_options','intelcom_ca-scraper-admin','intelcom_ca_scraper_admin_page','',200);
+		}
+
+		add_action('admin_menu','intelcom_ca_scraper_admin');
+
 	}
 
 	/**

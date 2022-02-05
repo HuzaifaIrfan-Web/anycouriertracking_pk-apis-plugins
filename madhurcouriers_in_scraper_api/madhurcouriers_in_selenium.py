@@ -183,6 +183,7 @@ def scrape_data(tracking_number_text,soup):
             Transaction_Type = tds[2].text.strip()
         except:
             Transaction_Type=''
+            continue
 
         try:
             Status = tds[3].text.strip()
