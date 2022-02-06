@@ -94,7 +94,7 @@ Invalid Tracking Number
 
 
 <?php 
- return $content;
+ return;
 }
 
 
@@ -109,7 +109,7 @@ if ($httpCode == 404) {
   
   <?php 
   
-      return $content;
+      return;
   }
 
 
@@ -152,8 +152,6 @@ $status=$res['track_histories'];
 
 if($status){
 	
-	$deliveryStatus = 4; 
-
     ?>
 
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -222,8 +220,8 @@ Track History for: <?php echo $tnum; ?>
 </h4>
 
 
-<div class="card card-stepProgress-Div  " style="margin:0% 2% 5% 2%;padding:2% 0%;">
-      <div class="container" style="">
+<div class="card card-stepProgress-Div  " style="margin:2% 2% 5% 2%;padding:2% 0%;">
+      <div class="container stepProgress-Div" style="">
 
                   
                <ul class="StepProgress ">
