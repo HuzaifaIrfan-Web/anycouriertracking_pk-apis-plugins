@@ -235,7 +235,7 @@ h1 {
 }
 .StepProgress-item.is-done::after {
   display: flex;
-  content: "✔";
+  content: "\2713";
   font-size: 1rem;
   color: #fff !important;
   text-align: center;

@@ -231,7 +231,7 @@ Tracking Result
               </h4>
 
 
-              <div class="card card-stepProgress-Div  " style="margin:2% 2% 5% 2%;padding:2% 0%;">
+              <div class="card card-stepProgress-Div  " style="margin:0%;padding:2% 0%;">
                 <div class="container stepProgress-Div" style="">
 
 
