@@ -31,6 +31,18 @@ class madhurcouriers_in_scraper_api_plugin_Activator {
 	 */
 	public static function activate() {
 
+		$post = array(     
+			'post_content'   => '
+		   [madhurcouriers_in_track_form]
+		   [madhurcouriers_in_track_details]
+
+			', //content of page
+			'post_title'     =>'MadhurCouriers IN Shipment Details', //title of page
+			'post_status'    =>  'publish' , //status of page - publish or draft
+			'post_type'      =>  'page'  // type of post
+  );
+  wp_insert_post( $post ); // creates page
+
 	}
 
 }

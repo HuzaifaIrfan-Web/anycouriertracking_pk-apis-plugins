@@ -156,10 +156,6 @@ if($status){
 
     ?>
 
-<style>
-
-</style>
-
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
 
@@ -222,11 +218,11 @@ if($track_histories){
 
 <div class='track-history' style='overflow-x:auto;' >
 <h4 style="font-weight:bold">
-Track History:
+Track History for: <?php echo $tnum; ?>
 </h4>
 
 
-<div class="card" style="margin:5%;padding:2%;">
+<div class="card card-stepProgress-Div  " style="margin:0% 2% 5% 2%;padding:2% 0%;">
       <div class="container" style="">
 
                   
@@ -234,10 +230,16 @@ Track History:
                  <?php foreach($track_histories as $item) {
                    ?>
 
-                  <li class="StepProgress-item is-done"><strong><?php echo $item['track_title'];?></strong>
+                  <li class="StepProgress-item is-done">
+                   <span class="transaction-type"><strong> <?php echo strtolower($item['track_title']);?></strong> </span>
                      
-                     <?php echo $item['track_text'];?> 
-                     <br>  <i class="fas fa-clock fa-black-color" aria-hidden="true"></i> <?php echo $item['datetime']; ;?>
+                   <span class="status-type"><?php echo strtolower($item['track_text']);?> </span>  
+
+                   <br> 
+                   
+                   <span class="date-type"> <i class="fas fa-clock fa-black-color" aria-hidden="true"></i> <?php echo strtolower($item['datetime']); ?>
+                  </span>
+                  
                   </li>        
                   
                   <?php }?>
@@ -246,6 +248,7 @@ Track History:
                         
       </div>
    </div>
+
 
 
 </div>

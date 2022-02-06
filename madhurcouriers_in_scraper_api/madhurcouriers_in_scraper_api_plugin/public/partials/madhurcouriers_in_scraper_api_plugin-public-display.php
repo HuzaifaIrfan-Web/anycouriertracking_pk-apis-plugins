@@ -161,19 +161,32 @@ Track History for: <?php echo $tnum; ?>
 
 
 
-<div class="card" style="margin:5%;padding:2%;">
-      <div class="container" style="">
+
+
+<div class="card card-stepProgress-Div" style="margin:5% 2%;padding:2% 0%;">
+      <div class="container stepProgress-Div" style="">
 
                   
                <ul class="StepProgress ">
-                 <?php foreach($track_histories as $item) {
+                 <?php
+              
+                 foreach($track_histories as $item) {
+         
                    ?>
 
-                  <li class="StepProgress-item is-done"><strong><?php echo $item['Transaction_Type'];?></strong>
-                     
-                     <?php echo $item['Status'];?> 
-                     <br>Remarks : <?php if($item['Remark'] ==''){echo "N/a";} else { echo $item['Remark'];}?>
-                      <br> <i class="fas fa-clock fa-black-color" aria-hidden="true"></i> <?php echo $item['Date'];?> 
+                  <li class="StepProgress-item is-done">
+                      
+                  
+                  <span class=" transaction-type"><strong><?php echo strtolower($item['Transaction_Type']);?></strong>
+                  </span>
+                 <span class="status-type">    <?php echo strtolower($item['Status']);?>  </span>
+                 <br>
+                 <span class="remarks-type">
+                 Remarks : <?php if($item['Remark'] ==''){echo "Not available";} else { echo strtolower($item['Remark']);}?>
+                 </span>
+                 <br>
+                 <span class="date-type">  <i class="fas fa-clock fa-black-color" aria-hidden="true"></i> <?php echo $item['Date'];?> </span>
+                   
                   </li>        
                   
                   <?php }?>
@@ -182,7 +195,6 @@ Track History for: <?php echo $tnum; ?>
                         
       </div>
    </div>
-
 
 </div>
 

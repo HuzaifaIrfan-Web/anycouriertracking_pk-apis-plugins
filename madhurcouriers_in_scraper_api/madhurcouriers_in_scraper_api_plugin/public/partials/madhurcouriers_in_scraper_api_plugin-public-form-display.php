@@ -35,10 +35,10 @@ $madhurcouriers_in_tracking_details_url= get_option('madhurcouriers_in_tracking_
 
 
 <form method='get' action='<?php echo $madhurcouriers_in_tracking_details_url;?>'>
-<div style='display:flex; flex-direction:column; width:90%;'>
+<div  style='display:flex; flex-direction:column; width:100%;'>
 <h4 for='tnum' style="font-weight:bold;">Tracking Number:</h4>
-<div style='display:flex;width:95%; '>
-<input  style="width:100%;" name='tnum' type='text'  placeholder='Tracking Number'
+<div style='display:flex; width:100%;' >
+<input  style='display:flex; width:100%;' name='tnum' type='text'  placeholder='Tracking Number'
 value='<?php echo $tnum;?>'/>
 <input type='submit' value='Track'/>
 

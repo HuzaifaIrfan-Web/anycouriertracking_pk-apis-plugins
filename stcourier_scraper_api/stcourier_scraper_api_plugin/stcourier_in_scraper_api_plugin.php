@@ -46,20 +46,6 @@ define( 'stcourier_SCRAPER_API_PLUGIN_VERSION', '1.0.0' );
 function activate_stcourier_scraper_api_plugin() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-stcourier_scraper_api_plugin-activator.php';
 	stcourier_scraper_api_plugin_Activator::activate();
-
-
-           $post = array(     
-             'post_content'   => '
-            [stcourier_track_form]
-            [stcourier_track_details]
-
-             ', //content of page
-             'post_title'     =>'STCourier Shipment Details', //title of page
-             'post_status'    =>  'publish' , //status of page - publish or draft
-             'post_type'      =>  'page'  // type of post
-   );
-   wp_insert_post( $post ); // creates page
-
 }
 
 /**

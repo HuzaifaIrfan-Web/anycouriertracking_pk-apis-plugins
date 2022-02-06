@@ -232,7 +232,7 @@ Track History:
 </h4>
 
 
-<div class="card" style="margin:5%;padding:2%;">
+<div class="card" style="margin:0% 2% 5% 0%;padding:2% 0%;">
       <div class="container" style="">
 
                   
@@ -240,10 +240,16 @@ Track History:
                  <?php foreach($track_histories as $item) {
                    ?>
 
-                  <li class="StepProgress-item is-done"><strong><?php echo $item['tracking_title'];?></strong>
+                  <li class="StepProgress-item is-done">
+                  
+                    <span class="transaction-type">
+                      <strong><?php echo strtolower($item['tracking_title']);?></strong></span>
                      
-                     <?php echo $item['span'];?> 
-                     <br>  <i class="fas fa-clock fa-black-color" aria-hidden="true"></i> <?php echo $item['date']; $item['time'];?>
+                     <span class="status-type"><?php echo strtolower($item['span']);?> </span>
+                     <br>
+                     <span class="date-type">
+                       <i class="fas fa-clock fa-black-color" aria-hidden="true"></i> <?php echo strtolower($item['date']); strtolower($item['time']);?>
+                      </span>  
                   </li>        
                   
                   <?php }?>
